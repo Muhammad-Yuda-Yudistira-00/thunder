@@ -32,5 +32,6 @@
         "SESSION_DRIVER": "cookie",
 
         "DB_CONNECTION": "sqlite"
-    }
+    },
+    "buidCommand": "cp database/database.sqlite /tmp/database.sqlite"
 }
