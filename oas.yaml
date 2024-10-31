@@ -1,0 +1,230 @@
+openapi: 3.0.0
+info:
+  title: Thunder API
+  description: Media social like facebook but grouping of room for post or interaction
+  contact:
+    name: Muhammad Yuda Yudistira
+    url: https://www.linkedin.com/in/muhammad-yudistira-24a071258/
+    email: yudistira22112022@gmail.com
+  license:
+    name: The MIT License
+    url: https://opensource.org/license/mit
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: development
+  - url: https://thunder-beta.vercel.app
+    description: production
+paths:
+  /dashboard/rooms:
+    get:
+      security:
+        - ThunderAuth: []
+      description: Get all room datas
+      tags:
+        - rooms
+      responses:
+        200:
+          description: Display rooms page
+          content:
+            application/json:
+              schema: 
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    slug: 
+                      type: string
+                    category:
+                      type: string
+              example: 
+                rooms:
+                  - name: anime
+                    slug: anime
+                    category: entertainment
+                  - name: drakor
+                    slug: drakor
+                    category: entertainment
+                  - name: sains
+                    slug: sains
+                    category: education
+        404:
+          description: Display not found page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-data'
+  /dashboard/rooms/{slug}:
+    get:
+      security: 
+        - ThunderAuth: []
+      description: Get all post of spesific room
+      tags:
+        - room
+      parameters:
+        - $ref: '#/components/parameters/room-slug'
+      responses:
+        200:
+          description: Display all post at specific room
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/post-data'
+              examples:
+                anime_room:
+                  summary: anime room
+                  value:
+                  - message: post 1
+                    room: anime
+                    user_id: 1
+                  - message: post 2
+                    room: anime
+                    user_id: 2
+                  - message: post 3
+                    room: anime
+                    user_id: 1
+                drakor_room:
+                  summary: drakor room
+                  value:
+                  - message: post 1
+                    room: drakor
+                    user_id: 1
+                  - message: post 2
+                    room: drakor
+                    user_id: 2
+                  - message: post 3
+                    room: drakor
+                    user_id: 1
+                sains_room:
+                  summary: sains room
+                  value:
+                  - message: post 1
+                    room: sains
+                    user_id: 1
+                  - message: post 2
+                    room: sains
+                    user_id: 2
+                  - message: post 3
+                    room: sains
+                    user_id: 1
+        404:
+          description: Display not found page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-data'
+    post:
+      security:
+        - ThunderAuth: []
+      description: Create new post at spesific room by user
+      tags:
+        - room
+      parameters: 
+        - $ref: '#/components/parameters/room-slug'
+      requestBody:
+        description: Fill the message for posting, with user_id and category by default
+        required: true
+        content: 
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/post-data'
+            examples:
+              anime_post:
+                summary: Post for anime room
+                value: 
+                  body: Post membahas anime
+                  room: anime
+                  user_id: 2
+              drakor_post:
+                summary: Post for drakor room
+                value:
+                  body: Post membahas drakor
+                  room: drakor
+                  user_id: 1
+              sains_post:
+                summary: Post for sains room
+                value:
+                  body: Post membahas sains
+                  room: sains
+                  user_id: 1
+      responses:
+        201:
+          description: Create post success
+          headers:
+            location:
+              description: Url to back page aka to post at spesific room
+              schema:
+                type: string
+              example: /dashboard/rooms/{slug}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alert: 
+                    type: string
+              example: 1
+        401:
+          description: User hasn't logged in
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error-data'
+components:
+  securitySchemes:
+    ThunderAuth:
+      description: Only user can access posts and rooms
+      type: apiKey
+      name: X-API-Key
+      in: header
+  parameters:
+    room-slug:
+      name: slug
+      in: path
+      description: Identifier for room by slug
+      required: true
+      schema: 
+        type: string
+        minLength: 1
+        maxLength: 100
+        nullable: false
+      examples:
+        anime:
+          value: anime
+          summary: slug for anime
+        drakor: 
+          value: drakor
+          summary: slug for drakor
+        sains:
+          value: sains
+          summary: slug for sains
+  schemas:
+    post-data:
+      type: object
+      required:
+        - body
+        - room
+        - user_id
+      properties:
+        body:
+          type: string
+          minLength: 1
+        room: 
+          type: string
+          minLength: 1
+          maxLength: 100
+        user_id:
+          type: integer
+          format: int64
+    error-data:
+      type: object
+      properties:
+        error:
+          type: boolean
+externalDocs: 
+  url: https://yudistira22112022714.showwcase.com/
+  description: Find more here (showwcase)

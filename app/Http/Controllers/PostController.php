@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Posting;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -17,7 +17,7 @@ class PostController extends Controller
         $validatedData['user_id'] = auth()->user()->id;
 
         try {
-            Posting::create($validatedData);
+            Post::create($validatedData);
             return back()->with('success', 'Your post has been created!');
         } catch (\Exception $e) {
             return back()->with('failed', 'Your post failed to create!');

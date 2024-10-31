@@ -16,7 +16,7 @@
 
 </div>
 
-<div class="w-full flex flex-col items-center">
+<div class="max-w-2xl mx-auto flex flex-col items-center">
   @if(count($posts) > 0)
     <x-general.chat-bubble :$posts></x-general>
   @else

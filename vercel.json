@@ -5,6 +5,7 @@
             "runtime": "vercel-php@0.7.2"
         }
     },
+    "buildCommand": "pnpm build",
     "routes": [
         {
             "src": "/img/(.*)",
@@ -25,6 +26,7 @@
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://thunder.vercel.app",
+        "APP_KEY": "base64:NJiIhKfnUb0Sg6Gn/MngtbBfy5rfYuryPup44zrOFPo=",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
