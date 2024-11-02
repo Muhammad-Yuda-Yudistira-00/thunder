@@ -20,7 +20,7 @@ class PostFactory extends Factory
         $category = ['anime', 'drakor', 'hollywood'];
         return [
             'user_id' => User::inRandomOrder()->value('id'),
-            'message' => fake()->paragraph(),
+            'body' => fake()->paragraph(),
             'category' => $category[array_rand($category)]
         ];
     }

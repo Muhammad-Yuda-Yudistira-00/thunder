@@ -24,7 +24,7 @@
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "https://thunder.vercel.app",
         "APP_KEY": "base64:NJiIhKfnUb0Sg6Gn/MngtbBfy5rfYuryPup44zrOFPo=",
 

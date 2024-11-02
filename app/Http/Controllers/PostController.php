@@ -10,7 +10,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'message' => 'required|string|min:5',
+            'body' => 'required|string|min:5',
             'category' => 'required|string'
         ]);
 
