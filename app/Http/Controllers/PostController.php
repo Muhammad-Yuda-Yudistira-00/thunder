@@ -9,14 +9,13 @@ class PostController extends Controller
 {
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'body' => 'required|string|min:5',
-            'category' => 'required|string'
-        ]);
-
-        $validatedData['user_id'] = auth()->user()->id;
-
         try {
+            $validatedData = $request->validate([
+                'body' => 'required|string|min:5',
+                'room_id' => 'required|integer'
+            ]);
+            $validatedData['user_id'] = auth()->user()->id;
+
             Post::create($validatedData);
             return back()->with('success', 'Your post has been created!');
         } catch (\Exception $e) {

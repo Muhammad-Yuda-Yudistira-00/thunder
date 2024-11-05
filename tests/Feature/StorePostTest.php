@@ -6,7 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Posting;
+use App\Models\Post;
+use App\Models\Room;
 use PHPUnit\Framework\Attributes\Test;
 
 // PR: it_create_a_posting_with_failed_insert_to_database
@@ -19,19 +20,27 @@ class StorePostTest extends TestCase
     public function it_creates_a_posting_with_valid_data()
     {
         $user = User::factory()->create();
+        $slug = Room::factory()->create();
         $this->actingAs($user);
 
+        $slug = Room::inRandomOrder()->value('slug');
+        $roomId = Room::inRandomOrder()->value('id');
+
+
         $data = [
-            'message' => 'This is message valid',
-            'category' => 'hollywood',
+            'body' => 'This is message valid',
+            'room_id' => $roomId,
             'user_id' => $user->id,
         ];
-        $response = $this->post(route('post.store'), $data);
+
+        $this->assertNotNull($slug, 'Slug is null');
+        $this->assertNotNull($roomId, 'RoomId is null');
+        $response = $this->post(route('post.store', ['slug' => $slug]), $data);
 
         $response->assertRedirect();
         $response->assertSessionHas('success', 'Your post has been created!');
 
-        $this->assertDatabaseHas('postings', $data);
+        $this->assertDatabaseHas('posts', $data);
     }
 
     #[Test]
@@ -41,16 +50,16 @@ class StorePostTest extends TestCase
         $this->actingAs($user);
 
         $data = [
-            'message' => 'Hey',
+            'body' => 'Hey',
         ];
 
         $response = $this->post(route('post.store'), $data);
 
         $response->assertRedirect();
-        $response->assertSessionHasErrors('message');
-        $response->assertSessionHasErrors('category');
+        $response->assertSessionHasErrors('body');
+        $response->assertSessionHasErrors('room_id');
 
-        $this->assertDatabaseMissing('postings', $data);
+        $this->assertDatabaseMissing('posts', $data);
     }
 
     #[Test]

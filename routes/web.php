@@ -13,7 +13,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::get('/dashboard/{slug}', [DashboardController::class, 'show'])->name('dashboard.show');
-    Route::post('/dashboard/posting', [PostController::class, 'store'])->name('post.store');
+    Route::post('/dashboard/{slug}', [PostController::class, 'store'])->name('post.store');
 });
 
 Route::middleware('auth')->group(function () {
