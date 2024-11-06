@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->enum('label', ['Entertainment', 'Education']);
             $table->string('category');
-            $table->string('site');
+            $table->string('site')->nullable();
             $table->timestamps();
         });
     }

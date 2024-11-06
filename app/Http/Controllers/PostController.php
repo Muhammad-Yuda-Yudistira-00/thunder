@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -18,6 +19,8 @@ class PostController extends Controller
 
             Post::create($validatedData);
             return back()->with('success', 'Your post has been created!');
+        } catch(ValidationException $e) {
+            return back()->withErrors($e->errors());
         } catch (\Exception $e) {
             return back()->with('failed', 'Your post failed to create!');
         }

@@ -16,61 +16,88 @@ class StorePostTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected $slug, $roomId, $user;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::factory()->create();
+
+        Room::factory(4)->create();
+        $this->slug = Room::inRandomOrder()->value('slug');
+        $this->roomId = Room::inRandomOrder()->value('id');
+    }
+
     #[Test]
     public function it_creates_a_posting_with_valid_data()
     {
-        $user = User::factory()->create();
-        $slug = Room::factory()->create();
-        $this->actingAs($user);
-
-        $slug = Room::inRandomOrder()->value('slug');
-        $roomId = Room::inRandomOrder()->value('id');
-
+        $this->actingAs($this->user);
 
         $data = [
             'body' => 'This is message valid',
-            'room_id' => $roomId,
-            'user_id' => $user->id,
+            'room_id' => $this->roomId,
+            'user_id' => $this->user->id,
         ];
 
-        $this->assertNotNull($slug, 'Slug is null');
-        $this->assertNotNull($roomId, 'RoomId is null');
-        $response = $this->post(route('post.store', ['slug' => $slug]), $data);
+        $this->assertNotNull($this->slug, 'Slug is null');
+        $this->assertNotNull($this->roomId, 'RoomId is null');
+        $response = $this->post(route('post.store', ['slug' => $this->slug]), $data);
 
         $response->assertRedirect();
         $response->assertSessionHas('success', 'Your post has been created!');
 
-        $this->assertDatabaseHas('posts', $data);
+        $this->assertDatabaseHas('posts', [
+            'body' => 'This is message valid',
+            'room_id' => $this->roomId,
+            'user_id' => $this->user->id,
+        ]);
     }
 
     #[Test]
     public function it_creates_a_posting_with_invalid_data()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $this->actingAs($this->user);
 
         $data = [
             'body' => 'Hey',
+            'room_id' => $this->roomId,
+            'user_id' => $this->user->id
         ];
 
-        $response = $this->post(route('post.store'), $data);
+        $this->assertNotNull($this->slug);
+        $this->assertNotNull($this->roomId);
+        $response = $this->post(route('post.store', ['slug' => $this->slug]), $data);
 
         $response->assertRedirect();
         $response->assertSessionHasErrors('body');
-        $response->assertSessionHasErrors('room_id');
 
-        $this->assertDatabaseMissing('posts', $data);
+        $this->assertDatabaseMissing('posts', [
+            'body' => 'Hey',
+            'room_id' => $this->roomId,
+            'user_id' => $this->user->id
+        ]);
     }
 
     #[Test]
     public function it_fails_when_user_is_not_authenticated()
     {
         $data = [
-            'message' => 'Tidak login dahulu',
-            'category' => 'anime',
+            'body' => 'Tidak login dahulu',
+            'room_id' => $this->roomId,
+            'user_id' => null
         ];
 
-        $response = $this->post(route('post.store'), $data);
+        $this->assertNotNull($this->slug);
+        $this->assertNotNull($this->roomId);
+
+        $response = $this->post(route('post.store', ['slug' => $this->slug]), $data);
         $response->assertRedirect(route('login'));
+
+        $this->assertDatabaseMissing('posts', [
+            'body' => 'Tidak login dahulu',
+            'room_id' => $this->roomId,
+            'user_id' => null
+        ]);
     }
 }
