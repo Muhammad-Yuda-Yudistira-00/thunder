@@ -34,6 +34,11 @@
                 <li>
                   <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Edit Profile</a>
                 </li>
+                @if(auth()->user() && auth()->user()->role == 'admin')
+                  <li>
+                    <a href="{{ route('admin.dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Role Access</a>
+                  </li>
+                @endif
                 <li>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
