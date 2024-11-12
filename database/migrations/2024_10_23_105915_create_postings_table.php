@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
             $table->text('body');
-            $table->foreignIdFor(Room::class)->constrained();
+            $table->foreignId('room_id')->constrained();
             $table->timestamps();
         });
     }

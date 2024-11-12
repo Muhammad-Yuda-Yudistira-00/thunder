@@ -21,9 +21,9 @@ class DashboardController extends Controller
     {
         $rooms = Room::get();
         $active = Room::where('slug', $slug)->pluck('slug')->first();
-        $activeRoom = Room::where('slug', $slug)->pluck('id')->first();
-        $posts = Post::where('room_id', $activeRoom)->latest()->get();
+        $roomId = Room::where('slug', $slug)->pluck('id')->first();
+        $posts = Post::where('room_id', $roomId)->latest()->get();
 
-        return view('dashboard', ['active' => $active, 'rooms' => $rooms, 'posts' => $posts, 'activeRoom' => $activeRoom]);
+        return view('dashboard', ['active' => $active, 'rooms' => $rooms, 'posts' => $posts, 'roomId' => $roomId]);
     }
 }

@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Room extends Model
 {
     use HasFactory;
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
+
+

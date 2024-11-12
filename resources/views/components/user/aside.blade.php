@@ -8,7 +8,7 @@
       <ul class="space-y-2 font-medium">
         @foreach($rooms as $room)
         <li>
-            <x-user.aside-item href="{{ route('dashboard.show', ['slug' => $room->slug]) }}" class="{{ $active == $room->slug ? 'dark:text-blue-700' : '' }}">{{ $room->name }}</x-user>
+            <x-user.aside-item href="{{ route('dashboard.show', ['slug' => $room->slug]) }}" class="{{ $active == $room->slug ? 'dark:text-red-800 text-red-800' : '' }}">{{ $room->name }}</x-user>
          </li>
          @endforeach
       </ul>
