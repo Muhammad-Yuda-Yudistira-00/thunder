@@ -32,6 +32,16 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        // upload process here
+        if ($request->hasFile('profile_picture')) {
+            if ($request->user()->profile_picture) {
+                Storage::delete($request->user()->profile_picture);
+            }
+
+            $path = $request->file('profile_picture')->store('profile_pictures');
+            $request->user()->profile_picture = $path;
+        }
+
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
