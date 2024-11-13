@@ -11,6 +11,10 @@ use App\Http\Controllers\AdminDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+    }
+
     return view('home');
 });
 
@@ -34,12 +38,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Bookmark
     Route::post('/posts/{post_id}/bookmark', [BookmarkController::class, 'bookmarkPost'])->name('posts.bookmark');
     Route::post('/posts/{post_id}/remove-bookmark', [BookmarkController::class, 'removeBookmarkPost'])->name('posts.remove-bookmark');
+
+    // Super Admin OR Admin
+    Route::middleware(['role:super-admin|admin'])->group(function () {
+        Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+        Route::put('/admin/dashboard', [AdminDashboardController::class, 'update'])->name('admin.dashboard.update');
+
+        // Super Admin
+        Route::middleware(['role:super-admin'])->group(function () {
+            //
+        });
+    });
 });
 
-// Admin
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
