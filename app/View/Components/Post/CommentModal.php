@@ -1,17 +1,17 @@
 <?php
 
-namespace App\View\Components\General\Modal;
+namespace App\View\Components\Post;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Index extends Component
+class CommentModal extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public $active = null)
+    public function __construct(public $post = null)
     {
         //
     }
@@ -21,6 +21,6 @@ class Index extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.general.modal.index');
+        return view('components.post.comment-modal');
     }
 }

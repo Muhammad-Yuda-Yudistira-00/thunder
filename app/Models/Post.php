@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Conner\Likeable\Likeable;
+use Te7aHoudini\LaravelTrix\Traits\HasTrixRichText;
 
 
 class Post extends Model
 {
-    use HasFactory, Likeable;
+    use HasFactory, Likeable, HasTrixRichText;
 
     protected $guarded = ['id'];
 

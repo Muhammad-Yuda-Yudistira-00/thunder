@@ -3,7 +3,7 @@
 @endphp
 
 <div class="border-b-2 border-gray-600 mb-4">
-  <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="max-w-2xl w-full mx-auto block">
+  <button type="button" data-modal-target="post-modal" data-modal-toggle="post-modal" class="max-w-2xl w-full mx-auto block">
 		<input type="hidden" name="room_id" value="{{ $roomId }}">
     <div class="mb-5">
   	  <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
@@ -14,7 +14,7 @@
 
 <div class="max-w-2xl mx-auto flex flex-col items-center">
   @if(count($posts) > 0)
-    <x-general.chat-bubble :$posts></x-general>
+    <x-general.chat-bubble :$posts :$active></x-general>
   @else
     <div class="h-60 flex justify-center items-center">
       <h1 class="text-4xl dark:text-gray-300">Not Found: Posts</h1>
@@ -22,4 +22,6 @@
   @endif
 </div>
 
-<x-general.modal :$active></x-general>
+{{ $posts->links() }}
+
+<x-general.modal :$active modal="post"></x-general.modal>

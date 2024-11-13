@@ -11,6 +11,9 @@ class PostController extends Controller
     public function store(Request $request)
     {
         try {
+            $request->merge([
+                'body' => $request->input('post-trixFields.body')
+            ]);
             $validatedData = $request->validate([
                 'body' => 'required|string|min:5',
                 'room_id' => 'required|integer'
