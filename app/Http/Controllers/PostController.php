@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         try {
             $request->merge([
-                'body' => $request->input('post-trixFields.body')
+                'body' => $request->input('post-trixFields.content')
             ]);
             $validatedData = $request->validate([
                 'body' => 'required|string|min:5',

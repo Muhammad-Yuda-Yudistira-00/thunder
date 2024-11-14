@@ -19,7 +19,7 @@
             <div class="p-4 md:p-5">
                 <form class="space-y-4" action="{{ route('post.store', ['slug' => $active]) }}" method="POST">
                     @csrf
-                    @trix(\App\Post::class, 'body')
+                    @trix(\App\Post::class, 'content')
                     @error('body')
                       <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{ $message }}</p>
                     @enderror
