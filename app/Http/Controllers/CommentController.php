@@ -12,7 +12,7 @@ class CommentController extends Controller
     public function store(Request $request, $post_id)
     {
         $request->merge([
-            'comment_text' => $request->input('post-trixFields.post')
+            'comment_text' => $request->input('post-trixFields.body')
         ]);
         $request->validate([
             'comment_text' => 'required|string|max:1000',

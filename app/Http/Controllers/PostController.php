@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Room;
 use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, $slug)
     {
         try {
             $request->merge([
@@ -16,10 +17,9 @@ class PostController extends Controller
             ]);
             $validatedData = $request->validate([
                 'body' => 'required|string|min:5',
-                'room_id' => 'required|integer'
             ]);
             $validatedData['user_id'] = auth()->user()->id;
-
+            $validatedData['room_id'] = Room::where('slug', $slug)->first()->id;
             Post::create($validatedData);
             return back()->with('success', 'Your post has been created!');
         } catch(ValidationException $e) {
