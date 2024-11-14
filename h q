@@ -1,0 +1,28 @@
+*   [33mf78e6ed[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/dev[m[33m, [m[1;32mmain[m[33m)[m Merge pull request #2 from Muhammad-Yuda-Yudistira-00/feature/role-based-authentication
+[31m|[m[32m\[m  
+[31m|[m * [33mca59077[m feat: implement role-based authentication with super admin privileges
+[31m|[m[31m/[m  
+* [33m5795c76[m feat(mix) add pagination, trix laravel, comment input, like icon
+* [33mcbfad27[m feat(user) add change profile picture input and admin page
+* [33m746a457[m feat(post) add trix laravel
+* [33m1009f3d[m chore(env) change default env
+*   [33mf57df86[m Merge pull request #1 from Muhammad-Yuda-Yudistira-00/feature/user-interactions-and-profile
+[33m|[m[34m\[m  
+[33m|[m * [33m81c9d5a[m Add features: comment, like, bookmark, role-based admin, and profile picture
+[33m|[m[33m/[m  
+* [33mc4849ab[m feat(post) change path post method, fix testing store post
+* [33mf52ed09[m feat(post) change category column to be room id relationship with room table
+* [33m223c25c[m ui(post) fix width post fixed width, actived meta http-equiv, add local env laravel
+* [33mf3ef038[m ui(post) fix width post fixed width
+* [33m216e60b[m feat(post) create post for rooms
+* [33m35fa375[m design(dashboard) create rooms
+* [33mb73f76b[m chore(login) fix login system insecute http form
+* [33md96e693[m chore(vercel) on debug for production
+* [33mb2ccff4[m chore(dbs) change sqlite tobe mysql
+* [33m465944f[m fix(prod) duplicate sqlite file to tmp directory
+* [33m4c80017[m fix(vercel) change path first slash become not slash at tmp directory
+* [33m6483dbb[m fix(vercel) add build command to config
+* [33mfef7c02[m fix(vercel) type of index file
+* [33mcb9855c[m chore(vercel) set up vercel for deploy
+* [33mb2a0fa4[m Install Breeze
+* [33md4d8f3f[m Set up a fresh Laravel app

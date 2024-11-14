@@ -28,7 +28,7 @@
               <form action="{{ route('comments.store', ['post_id' => $post->id]) }}" method="POST">
                 @csrf
                 @method('POST')
-                @trix(\App\Post::class, 'body', [ 'hideButtonIcons' => ['attach'] ])
+                @trix(\App\Post::class, 'body')
                 <div class="mt-4 text-right">
                   <x-general.button type="submit">Comment</x-general>
                 </div>

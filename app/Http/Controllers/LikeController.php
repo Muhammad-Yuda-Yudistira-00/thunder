@@ -10,6 +10,7 @@ class LikeController extends Controller
 {
     public function likePost($post_id)
     {
+        // dd($post_id);
         $post = Post::findOrFail($post_id);
         $post->like();
 
@@ -18,6 +19,8 @@ class LikeController extends Controller
 
     public function unlikePost($post_id)
     {
+        // dd('for unlikepost:' . $post_id);
+
         $post = Post::findOrFail($post_id);
         $post->unlike();
 
