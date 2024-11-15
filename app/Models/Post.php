@@ -24,6 +24,11 @@ class Post extends Model
         return $this->belongsTo(Room::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function bookmarkedByUsers()
     {
         return $this->belongsToMany(User::class, 'bookmarks');
