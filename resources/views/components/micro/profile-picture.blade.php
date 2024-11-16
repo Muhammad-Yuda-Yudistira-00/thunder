@@ -1,1 +1,1 @@
-<img {{ $attributes->merge(['class' => 'rounded-full']) }} src="{{ $profilePicture ? asset('storage/' . auth()->user()->profile_picture) : asset('img/user-3.png') }}" alt="Profile Picture">
+<img {{ $attributes->merge(['class' => 'rounded-full']) }} src="{{ $profilePicture ? asset('storage/' . $profilePicture) : 'https://ui-avatars.com/api/?background=random&name=' . urlencode($name) . '&background=random' }}" alt="Profile Picture">

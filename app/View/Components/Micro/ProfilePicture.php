@@ -11,10 +11,17 @@ class ProfilePicture extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $profilePicture = null)
-    {
-        //
-    }
+
+     public $profilePicture;
+     public $name;
+     public $class;
+
+     public function __construct($profilePicture = null, $name, $class = null)
+     {
+         $this->profilePicture = $profilePicture;
+         $this->name = $name;
+         $this->class = $class;
+     }
 
     /**
      * Get the view / contents that represent the component.
