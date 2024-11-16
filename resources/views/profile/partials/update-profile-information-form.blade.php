@@ -26,7 +26,7 @@
         <div>
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="profile_picture">Change Profile Picture</label>
           <span class="my-4 w-24 h-24 my-4 block ml-4">
-            <x-micro.profile-picture :profilePicture="auth()->user()->profile_picture" class="w-full h-full"></x-micro>
+            <x-micro.profile-picture :profilePicture="auth()->user()->profile_picture" name="{{ auth()->user()->name }}" class="w-full h-full"></x-micro>
           </span>
           <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="profile_picture" type="file" name="profile_picture">
         </div>
