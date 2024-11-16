@@ -1,1 +1,1 @@
-<img class="w-8 h-8 rounded-full" src="{{ $profilePicture ? "#" : asset('img/user-3.png') }}" alt="Profile Picture">
+<img {{ $attributes->merge(['class' => 'rounded-full']) }} src="{{ $profilePicture ? asset('storage/' . auth()->user()->profile_picture) : asset('img/user-3.png') }}" alt="Profile Picture">

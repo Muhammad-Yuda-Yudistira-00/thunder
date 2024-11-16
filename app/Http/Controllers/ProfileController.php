@@ -39,7 +39,7 @@ class ProfileController extends Controller
                 Storage::delete($request->user()->profile_picture);
             }
 
-            $path = $request->file('profile_picture')->store('profile_pictures');
+            $path = $request->file('profile_picture')->store('profile_pictures', 'public');
             $request->user()->profile_picture = $path;
         }
 
