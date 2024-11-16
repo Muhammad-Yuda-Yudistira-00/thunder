@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
             RoomSeeder::class,
             UserSeeder::class,
             PostSeeder::class,
-            CommentSeeder::class
-
+            CommentSeeder::class,
+            LikeSeeder::class,
         ]);
     }
 }
