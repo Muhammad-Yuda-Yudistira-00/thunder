@@ -58,14 +58,20 @@
           @method("POST")
           @trix(\App\Post::class, "body")
           <div class="mt-4 text-right">
-    <x-general.button type="submit">Comment</x-general.button>
+            <x-general.button type="submit">Comment</x-general.button>
           </div>
         </form>
-          @if(!$post->comments->isEmpty())
-                <x-general.chat-bubble-comment :comments="$post->comments"></x-general.chat-bubble-comment>
-          @else
+
+        @php
+        $parentComments = $post->comments->whereNull('parent_comment_id');
+        @endphp
+
+        @if($parentComments->isNotEmpty())
+            <x-general.chat-bubble-comment :comments="$parentComments"></x-general.chat-bubble-comment>
+        @else
             <h3 class="text-4xl py-12 dark:text-slate-100 font-extralight opacity-30 text-center">Comment not found!</h3>
-          @endif
+        @endif
+
       </div>
     </div>
   </div>

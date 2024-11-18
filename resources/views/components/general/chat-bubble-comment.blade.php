@@ -4,7 +4,8 @@
 
 <ul class="border-t-2 w-full mt-8 dark:border-slate-300">
 @foreach($comments as $comment)
-  <div class="flex items-start gap-2.5 first:mt-8 mt-2">
+  @if($comment->parent_comment_id == null)
+  {{-- <div class="flex items-start gap-2.5 first:mt-8 mt-2">
      <img class="w-8 h-8 rounded-full" src="{{ $comment->user->profile_picture ? asset('storage/' . $comment->user->profile_picture) : asset('img/user-3.png') }}" alt="Jese image">
      <div class="flex flex-col w-full leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
         <div class="flex items-center space-x-2 rtl:space-x-reverse">
@@ -38,6 +39,8 @@
            </li>
         </ul>
      </div>
-  </div>
+  </div> --}}
+    <x-comment-item :comment="$comment"></x-comment-item>
+  @endif
 @endforeach
 </ul>

@@ -23,7 +23,15 @@ class DashboardController extends Controller
         $rooms = Room::get();
         $active = Room::where('slug', $slug)->pluck('slug')->first();
         $roomId = Room::where('slug', $slug)->pluck('id')->first();
-        $posts = Post::with(['comments', 'comments.user'])->where('room_id', $roomId)->latest()->paginate(10);
+        // diganti sementara
+        // $posts = Post::with(['comments', 'comments.user'])->where('room_id', $roomId)->latest()->paginate(10);
+
+        $posts = Post::with([
+            'comments' => function ($query) {
+                $query->with(['user', 'children.user'])->orderBy('created_at', 'asc');
+            }
+        ])->where('room_id', $roomId)->latest()->paginate(10);
+
 
         $bookmarks = Bookmark::with(['user', 'post'])->latest()->paginate(10);
 

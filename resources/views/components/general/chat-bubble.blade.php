@@ -55,7 +55,7 @@
                 </span>
               @endif
               <small class="font-bold">
-                  {{ $post->comments->count() }}
+                  {{ $post->comments()->whereNull('parent_comment_id')->count(); }}
               </small>
             </button>
           </span>
@@ -72,19 +72,6 @@
               <button type="button" data-modal-target="comment-modal-{{ $post->id }}" data-modal-toggle="comment-modal-{{ $post->id }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Comment</button>
            </li>
            <li>
-            {{-- @foreach($bookmarks as $bookmark)
-              @if($post->id == $bookmark->post->id)
-                <form action="{{ route('posts.remove-bookmark', $post->id) }}" method="POST">
-                  @csrf
-                      <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove Bookmark</button>
-                </form>
-              @else
-                <form action="{{ route('posts.bookmark', $post->id) }}" method="POST">
-                  @csrf
-                      <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Bookmark</button>
-                </form>
-              @endif
-            @endforeach --}}
             @php
               $isBookmarked = false; // Penanda apakah post sudah di-bookmark
             @endphp
