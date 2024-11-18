@@ -27,8 +27,6 @@ class DashboardController extends Controller
 
         $bookmarks = Bookmark::with(['user', 'post'])->latest()->paginate(10);
 
-        dd($bookmarks[0]->post);
-
-        return view('dashboard', ['active' => $active, 'rooms' => $rooms, 'posts' => $posts, 'roomId' => $roomId]);
+        return view('dashboard', ['active' => $active, 'rooms' => $rooms, 'posts' => $posts, 'roomId' => $roomId, 'bookmarks' => $bookmarks]);
     }
 }

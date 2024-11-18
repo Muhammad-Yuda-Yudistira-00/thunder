@@ -1,5 +1,6 @@
 @php
   // dd($posts[1]->comments[0]->user);
+  // dd($bookmarks);
 @endphp
 
 @foreach($posts as $post)
@@ -71,12 +72,45 @@
               <button type="button" data-modal-target="comment-modal-{{ $post->id }}" data-modal-toggle="comment-modal-{{ $post->id }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Comment</button>
            </li>
            <li>
-            <form action="{{ route('posts.bookmark', $post->id) }}" method="POST">
-              @csrf
-              <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove Bookmark</button>
-            </form>
+            {{-- @foreach($bookmarks as $bookmark)
+              @if($post->id == $bookmark->post->id)
+                <form action="{{ route('posts.remove-bookmark', $post->id) }}" method="POST">
+                  @csrf
+                      <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove Bookmark</button>
+                </form>
+              @else
+                <form action="{{ route('posts.bookmark', $post->id) }}" method="POST">
+                  @csrf
+                      <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Bookmark</button>
+                </form>
+              @endif
+            @endforeach --}}
+            @php
+              $isBookmarked = false; // Penanda apakah post sudah di-bookmark
+            @endphp
+
+            @foreach($bookmarks as $bookmark)
+              @if($post->id == $bookmark->post->id)
+                @php
+                  $isBookmarked = true; // Tandai bahwa post ditemukan dalam bookmarks
+                @endphp
+                <form action="{{ route('posts.remove-bookmark', $post->id) }}" method="POST">
+                  @csrf
+                  <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove Bookmark</button>
+                </form>
+                @break <!-- Hentikan loop setelah menemukan match -->
+              @endif
+            @endforeach
+
+            @if(!$isBookmarked)
+              <form action="{{ route('posts.bookmark', $post->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Bookmark</button>
+              </form>
+            @endif
+
            </li>
-           <li>
+           {{-- <li>
               <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Forward</a>
            </li>
            <li>
@@ -87,7 +121,7 @@
            </li>
            <li>
               <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
-           </li>
+           </li> --}}
         </ul>
      </div>
   </div>

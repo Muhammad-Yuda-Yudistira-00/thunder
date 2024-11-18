@@ -18,7 +18,7 @@
         <x-general.alert status="error" color="red">{{ session('failed') }}</x-general>
           @endif
           <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-            <x-content :$active :$posts :$roomId></x-content>
+            <x-content :$active :$posts :$roomId :$bookmarks></x-content>
           </div>
     </div>
 </x-app-layout>

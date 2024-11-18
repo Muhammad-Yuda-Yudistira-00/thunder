@@ -11,7 +11,7 @@ class ChatBubble extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $posts = [])
+    public function __construct(public $posts = [], public $bookmarks = [])
     {
         //
     }

@@ -1,5 +1,6 @@
 @php
   // dd($posts[0]->user);
+  // dd($bookmarks);
 @endphp
 
 <div class="border-b-2 border-gray-600 mb-4">
@@ -14,7 +15,7 @@
 
 <div class="max-w-2xl mx-auto flex flex-col items-center">
   @if(count($posts) > 0)
-    <x-general.chat-bubble :$posts :$active></x-general>
+    <x-general.chat-bubble :$posts :$active :$bookmarks></x-general.chat-bubble>
   @else
     <div class="h-60 flex justify-center items-center">
       <h1 class="text-4xl dark:text-gray-300">Not Found: Posts</h1>
