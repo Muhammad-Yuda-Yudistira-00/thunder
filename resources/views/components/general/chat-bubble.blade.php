@@ -4,7 +4,9 @@
 
 @foreach($posts as $post)
   <div class="flex items-start gap-2.5 mb-4">
+    <div class="h-10 w-10">
      <x-micro.profile-picture :profilePicture="$post->user->profile_picture" name="{{ $post->user->name }}" class="w-10 h-10"></x-micro>
+    </div>
      <div class="flex flex-col w-[620px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
         <div class="flex items-center space-x-2 rtl:space-x-reverse">
            <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $post->user->name }}</span>
@@ -67,6 +69,12 @@
         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
            <li>
               <button type="button" data-modal-target="comment-modal-{{ $post->id }}" data-modal-toggle="comment-modal-{{ $post->id }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Comment</button>
+           </li>
+           <li>
+            <form action="{{ route('posts.bookmark', $post->id) }}" method="POST">
+              @csrf
+              <button type="submit" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full text-left">Remove Bookmark</button>
+            </form>
            </li>
            <li>
               <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Forward</a>

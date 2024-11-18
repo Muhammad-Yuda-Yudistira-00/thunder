@@ -26,7 +26,10 @@
                             class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                             aria-expanded="false" data-dropdown-toggle="dropdown-user">
                             <span class="sr-only">Open user menu</span>
-                            <x-micro.profile-picture :profilePicture="auth()->user()->profile_picture" name="{{ auth()->user()->name }}" class="w-8 h-8"></x-micro>
+                            <div class="w-8 h-8">
+                              <x-micro.profile-picture :profilePicture="auth()->user()->profile_picture" name="{{ auth()->user()->name }}"></x-micro>
+
+                            </div>
                         </button>
                     </div>
                     <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
