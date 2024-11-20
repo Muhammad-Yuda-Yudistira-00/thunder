@@ -19,7 +19,7 @@ class CommentSeeder extends Seeder
         $posts = Post::all();
         $users = User::all();
 
-        foreach (range(1, 100) as $i) {
+        foreach (range(1, 1000) as $i) {
             Comment::create([
                 'post_id' => $posts->random()->id, // Assign a random post
                 'user_id' => $users->random()->id, // Assign a random user

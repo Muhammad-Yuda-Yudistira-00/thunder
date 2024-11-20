@@ -13,7 +13,67 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+   {{-- <form method="post" action="{{ route('profile.picture.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data" id="profile-picture-form">
+    @csrf
+    @method('patch')
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="profile_picture">Change Profile Picture</label>
+      <span class="my-4 w-24 h-24 my-4 block ml-4">
+        <x-micro.profile-picture :profilePicture="auth()->user()->profile_picture" name="{{ auth()->user()->name }}" class="w-full h-full"></x-micro>
+      </span>
+      <input
+        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        id="profile_picture"
+        type="file"
+        name="profile_picture"
+      >
+      <div class="mt-4">
+        <x-primary-button>{{ __('upload & crop') }}</x-primary-button>
+      </div>
+
+    </div>
+  </form> --}}
+
+  <form method="post" action="{{ route('profile.picture.update') }}" class="mt-6 space-y-6" id="profile-picture-form">
+    @csrf
+    @method('patch')
+
+    <div>
+        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="profile_picture">
+            Change Profile Picture
+        </label>
+        <span class="my-4 w-24 h-24 my-4 block ml-4">
+            <x-micro.profile-picture :profilePicture="auth()->user()->profile_picture" name="{{ auth()->user()->name }}" class="w-full h-full"></x-micro>
+        </span>
+
+        <!-- Trigger untuk membuka Modal -->
+        <input
+            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            id="profile_picture"
+            type="file"
+            name="profile_picture"
+            accept="image/*"
+            data-modal-toggle="profile-picture-modal"
+        >
+
+        {{-- <!-- Area preview gambar yang akan di-crop -->
+        <div id="image-preview-container" class="mt-4 hidden">
+            <img id="image-to-crop" style="max-width: 100%; max-height: 400px;" />
+        </div>
+
+        <!-- Tombol untuk upload dan crop -->
+        <div class="mt-4">
+            <x-primary-button id="crop-and-upload-button" type="button" disabled>{{ __('Upload & Crop') }}</x-primary-button>
+        </div> --}}
+
+        <x-profile.modal-profile-picture></x-profile.modal-profile-picture>
+    </div>
+</form>
+
+
+
+    <form method="post" action="{{ route('profile.info.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
@@ -23,13 +83,14 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
-        <div>
+        {{-- <div>
           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="profile_picture">Change Profile Picture</label>
           <span class="my-4 w-24 h-24 my-4 block ml-4">
             <x-micro.profile-picture :profilePicture="auth()->user()->profile_picture" name="{{ auth()->user()->name }}" class="w-full h-full"></x-micro>
           </span>
           <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="profile_picture" type="file" name="profile_picture">
-        </div>
+        </div> --}}
+
 
         <div>
             <x-input-label for="email" :value="__('Email')" />

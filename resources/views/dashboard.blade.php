@@ -4,7 +4,7 @@
 @endphp
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight ml-64 uppercase">
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight ml-64 uppercase fixed w-full bg-gray-800 h-16 top-16 left-0 pt-5 pl-8">
       {{ __('Room') . " " . $active }}
     </h2>
   </x-slot>

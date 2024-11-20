@@ -9,6 +9,7 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\AdminDashboardController;
 // use App\Http\Controllers\AnimeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -55,7 +56,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/update-info', [ProfileController::class, 'updateProfileInfo'])->name('profile.info.update');
+    Route::patch('/profile/update-picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');
+    Route::post('/crop-image', [ImageController::class, 'cropImage']);
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
